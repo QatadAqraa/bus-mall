@@ -23,9 +23,6 @@ function renderProduct(leftImage, middleImage, rightImage) {
     middleProductImg.setAttribute('src', arrayOfProducts[middleImage].url);
     rightProductImg.setAttribute('src', arrayOfProducts[rightImage].url);
 
-    leftProductImg.setAttribute(arrayOfProducts[leftImage].Show++1);
-
-
 }
 
 function pickAProduct() {
