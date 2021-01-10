@@ -1,0 +1,33 @@
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+nav {
+    background-color: rgb(173, 196, 241);
+}
+
+nav li img{
+  width: 8%;
+}
+
+ul {
+    margin: 0px;
+    padding: 25px;
+}
+
+header {
+    width: 100%;
+}
+
+section div {
+    width: 30%;
+    display: inline-block;
+    float: left;
+}
+
+section div img{
+    width: 50%;
+    display: inline;
+}
