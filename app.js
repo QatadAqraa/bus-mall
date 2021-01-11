@@ -22,7 +22,10 @@ function renderProduct(leftImage, middleImage, rightImage) {
     leftProductImg.setAttribute('src', arrayOfProducts[leftImage].url);
     middleProductImg.setAttribute('src', arrayOfProducts[middleImage].url);
     rightProductImg.setAttribute('src', arrayOfProducts[rightImage].url);
+}
 
+Product.prototype.isShowed = function () {
+    return this.Show++;
 }
 
 function pickAProduct() {
@@ -31,8 +34,13 @@ function pickAProduct() {
         var middleImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
         var rightImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
     } while (leftImage === middleImage || middleImage === rightImage || leftImage === rightImage);
+
+    arrayOfProducts[leftImage].isShowed()
+    arrayOfProducts[middleImage].isShowed()
+    arrayOfProducts[rightImage].isShowed()
    
     renderProduct(leftImage, middleImage, rightImage)
+
 }
 
 function checkProduct(objectIndicator) {
