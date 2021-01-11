@@ -1,5 +1,5 @@
 body {
-    background: rgb(145, 145, 145);
+    background: rgb(226, 226, 226);
 }
 
 nav {
@@ -10,6 +10,7 @@ nav {
 
 h1 {
     text-align: center;
+    padding-bottom: 40px;
 }
 
 nav img{
@@ -18,7 +19,7 @@ nav img{
 
 header nav {
     margin: 0px;
-    padding: 25px;
+    padding: 0px;
 }
 
 header {
