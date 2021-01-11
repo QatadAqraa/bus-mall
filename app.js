@@ -5,9 +5,11 @@ var leftProductImg = document.getElementById('left_product_img');
 var middleProductImg = document.getElementById('middle_product_img');
 var rightProductImg = document.getElementById('right_product_img');
 var productSection = document.getElementById('all_products');
-var resultShow = document.getElementById('Result');
-var resultPrint = document.getElementById('ResultForm')
+// var resultShow = document.getElementById('Result');
+// var resultPrint = document.getElementById('ResultForm');
+var productCanvas = document.getElementById('productChart').getContext('2d');
 var trialsleft = 25;
+var shownImages = [];
 
 function Product(name, image) {
     this.name = name;
@@ -27,39 +29,196 @@ function renderProduct(leftImage, middleImage, rightImage) {
 
     rightProductImg.setAttribute('src', arrayOfProducts[rightImage].url);
     rightProductImg.setAttribute('alt', arrayOfProducts[rightImage].name);
-    
+
 }
 
 Product.prototype.isShowed = function () {
     return this.Show++;
 }
 
+function renderChart() {
+
+    var arrayOfProductName = [];
+    var arrayOfProductCount = [];
+    var arrayOfProductShown = [];
+
+    console.log("string");
+
+    for (var index = 0; index < arrayOfProducts.length; index++) {
+        arrayOfProductName.push(arrayOfProducts[index].name);
+        arrayOfProductCount.push(arrayOfProducts[index].counter);
+        arrayOfProductShown.push(arrayOfProducts[index].Show);
+
+    }
+    var myChart = new Chart(productCanvas, {
+        type: 'bar',
+        data: {
+            labels: arrayOfProductName,
+            datasets: [
+                {
+                    label: '# of Product Clicks',
+                    data: arrayOfProductCount,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Time shown for the Product',
+                    data: arrayOfProductShown,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function checkAvailability(selectedProductName) {
+
+    for (var index = 0; index < shownImages.length; index++) {
+        if (shownImages[index].name === selectedProductName) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function pickAProduct() {
-    var leftImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
+    do {
+        var leftImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
+        var leftProductImageName = arrayOfProducts[leftImage].name;
+    } while (checkAvailability(leftProductImageName));
+
     do {
         var middleImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
+        var middleProductImageName = arrayOfProducts[middleImage].name;
         var rightImage = Math.round(Math.random() * (arrayOfProducts.length - 1))
-    } while (leftImage === middleImage || middleImage === rightImage || leftImage === rightImage);
+        var rightProductImageName = arrayOfProducts[rightImage].name;
+    } while (leftImage === middleImage || middleImage === rightImage || leftImage === rightImage || checkAvailability(rightProductImageName) || checkAvailability(middleProductImageName));
 
     arrayOfProducts[leftImage].isShowed()
     arrayOfProducts[middleImage].isShowed()
     arrayOfProducts[rightImage].isShowed()
-   
+
+    console.log(shownImages);
+
+    shownImages = [];
+    
+
+    shownImages.push(
+        arrayOfProducts[leftImage],
+        arrayOfProducts[middleImage],
+        arrayOfProducts[rightImage]
+    )
+
     renderProduct(leftImage, middleImage, rightImage)
 
 }
 
-function printResults() {
-    // console.log("inside printResults")
-    var ul = document.createElement('ul')
-    resultPrint.append(ul);
-    for (let i = 0; i < arrayOfProducts.length; i++) {
-        var li = document.createElement('li');
-        li.textContent = arrayOfProducts[i].name + ' had ' + arrayOfProducts[i].counter + ' votes, and was seen ' + arrayOfProducts[i].Show + 'times.';
-        ul.append(li);
-        
-    }
-}
+// function printResults() {
+//     // console.log("inside printResults")
+//     var ul = document.createElement('ul')
+//     resultPrint.append(ul);
+//     for (let i = 0; i < arrayOfProducts.length; i++) {
+//         var li = document.createElement('li');
+//         li.textContent = arrayOfProducts[i].name + ' had ' + arrayOfProducts[i].counter + ' votes, and was seen ' + arrayOfProducts[i].Show + 'times.';
+//         ul.append(li);
+
+//     }
+// }
 
 function checkProduct(objectIndicator) {
     for (var index = 0; index < arrayOfProducts.length; index++) {
@@ -84,6 +243,7 @@ function countProducts(event) {
     } else {
         productSection.removeEventListener('click', countProducts);
         console.log(arrayOfProducts);
+        renderChart();
     }
 }
 
@@ -111,5 +271,5 @@ new Product('wine-glass', 'wine-glass.jpg');
 pickAProduct();
 productSection.addEventListener('click', countProducts);
 // console.log(resultShow);
-resultShow.addEventListener('click', printResults);
+// resultShow.addEventListener('click', printResults);
 
