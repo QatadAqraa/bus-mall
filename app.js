@@ -4,9 +4,9 @@ var arrayOfProducts = [];
 var leftProductImg = document.getElementById('left_product_img');
 var middleProductImg = document.getElementById('middle_product_img');
 var rightProductImg = document.getElementById('right_product_img');
-
 var productSection = document.getElementById('all_products');
-
+var resultShow = document.getElementById('Result');
+var resultPrint = document.getElementById('ResultForm')
 var trialsleft = 25;
 
 function Product(name, image) {
@@ -20,8 +20,14 @@ function Product(name, image) {
 
 function renderProduct(leftImage, middleImage, rightImage) {
     leftProductImg.setAttribute('src', arrayOfProducts[leftImage].url);
+    leftProductImg.setAttribute('alt', arrayOfProducts[leftImage].name);
+
     middleProductImg.setAttribute('src', arrayOfProducts[middleImage].url);
+    middleProductImg.setAttribute('alt', arrayOfProducts[middleImage].name);
+
     rightProductImg.setAttribute('src', arrayOfProducts[rightImage].url);
+    rightProductImg.setAttribute('alt', arrayOfProducts[rightImage].name);
+    
 }
 
 Product.prototype.isShowed = function () {
@@ -41,6 +47,18 @@ function pickAProduct() {
    
     renderProduct(leftImage, middleImage, rightImage)
 
+}
+
+function printResults() {
+    // console.log("inside printResults")
+    var ul = document.createElement('ul')
+    resultPrint.append(ul);
+    for (let i = 0; i < arrayOfProducts.length; i++) {
+        var li = document.createElement('li');
+        li.textContent = arrayOfProducts[i].name + ' had ' + arrayOfProducts[i].counter + ' votes, and was seen ' + arrayOfProducts[i].Show + 'times.';
+        ul.append(li);
+        
+    }
 }
 
 function checkProduct(objectIndicator) {
@@ -92,16 +110,6 @@ new Product('wine-glass', 'wine-glass.jpg');
 
 pickAProduct();
 productSection.addEventListener('click', countProducts);
-
-var form = document.getElementById("ResultForm");
-
-function printResult (event) {
-    event.preventDefault();
-    var Imagecounter = event.target.counter.value;
-    var result = new Product(Imagecounter)
-    result.countProducts();
-}
-
-form.addEventListener('submit', printResult);
-
+// console.log(resultShow);
+resultShow.addEventListener('click', printResults);
 

@@ -1,18 +1,22 @@
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-    margin-left: 15px;
+body {
+    background: rgb(145, 145, 145);
 }
 
 nav {
+    margin-right: 15px;
+    margin-left: 15px;
     background-color: rgb(173, 196, 241);
 }
 
-nav li img{
-  width: 8%;
+h1 {
+    text-align: center;
 }
 
-ul {
+nav img{
+    width: 8%;
+}
+
+header nav {
     margin: 0px;
     padding: 25px;
 }
@@ -21,13 +25,18 @@ header {
     width: 100%;
 }
 
-section div {
+section img{
+    display: inline;
     width: 30%;
-    display: inline-block;
-    float: left;
+    margin-left: 40px;
+    margin-top: 40px;
+    height: 300px;
 }
 
-section div img{
-    width: 50%;
-    display: inline;
+button {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+ul {
+    margin-left: 40px;
 }
