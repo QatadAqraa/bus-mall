@@ -5,11 +5,14 @@ var leftProductImg = document.getElementById('left_product_img');
 var middleProductImg = document.getElementById('middle_product_img');
 var rightProductImg = document.getElementById('right_product_img');
 var productSection = document.getElementById('all_products');
-// var resultShow = document.getElementById('Result');
-// var resultPrint = document.getElementById('ResultForm');
+var resultShow = document.getElementById('Results');
+var clearDataBtn = document.getElementById('clearLocalStorage');
+var resultPrint = document.getElementById('ResultForm');
 var productCanvas = document.getElementById('productChart').getContext('2d');
 var trialsleft = 25;
 var shownImages = [];
+
+console.log(localStorage);
 
 function Product(name, image) {
     this.name = name;
@@ -18,6 +21,28 @@ function Product(name, image) {
     this.Show = 0;
 
     arrayOfProducts.push(this);
+}
+
+function clearLocalStorage(){
+
+    localStorage.clear();
+
+    arrayOfProducts = [];
+    
+    renderChart();
+}
+
+function storeData() {   
+
+    localStorage.setItem('Result', JSON.stringify(arrayOfProducts));
+
+}
+
+function checkAndRestore() {
+    
+    if (localStorage.length > 0 ) {
+        arrayOfProducts = JSON.parse(localStorage.getItem('Result'));
+    }
 }
 
 function renderProduct(leftImage, middleImage, rightImage) {
@@ -34,9 +59,12 @@ function renderProduct(leftImage, middleImage, rightImage) {
 
 Product.prototype.isShowed = function () {
     return this.Show++;
+
 }
 
 function renderChart() {
+
+    // resultShow.innerHTML = '';
 
     var arrayOfProductName = [];
     var arrayOfProductCount = [];
@@ -189,11 +217,12 @@ function pickAProduct() {
         var rightProductImageName = arrayOfProducts[rightImage].name;
     } while (leftImage === middleImage || middleImage === rightImage || leftImage === rightImage || checkAvailability(rightProductImageName) || checkAvailability(middleProductImageName));
 
-    arrayOfProducts[leftImage].isShowed()
-    arrayOfProducts[middleImage].isShowed()
-    arrayOfProducts[rightImage].isShowed()
+    arrayOfProducts[leftImage].Show++;
+    arrayOfProducts[middleImage].Show++;
+    arrayOfProducts[rightImage].Show++;
+    // storeData()
 
-    console.log(shownImages);
+    // console.log(shownImages);
 
     shownImages = [];
     
@@ -225,6 +254,7 @@ function checkProduct(objectIndicator) {
         if (arrayOfProducts[index].url === objectIndicator) {
             arrayOfProducts[index].counter++;
             trialsleft--;
+            storeData();
         }
     }
 }
@@ -240,10 +270,14 @@ function countProducts(event) {
             pickAProduct();
         }
 
-    } else {
+    } 
+    else {
         productSection.removeEventListener('click', countProducts);
-        console.log(arrayOfProducts);
-        renderChart();
+        // console.log(arrayOfProducts);
+        // renderChart();
+        storeData();
+    
+
     }
 }
 
@@ -268,8 +302,22 @@ new Product('usb', 'usb.gif');
 new Product('water-can', 'water-can.jpg');
 new Product('wine-glass', 'wine-glass.jpg');
 
+console.log(arrayOfProducts);
+
+checkAndRestore();
+
+console.log(arrayOfProducts);
+
 pickAProduct();
 productSection.addEventListener('click', countProducts);
 // console.log(resultShow);
-// resultShow.addEventListener('click', printResults);
+resultShow.addEventListener('click', renderChart);
+clearDataBtn.addEventListener('click', clearLocalStorage);
+
+console.log(arrayOfProducts);
+
+
+
+
+
 
