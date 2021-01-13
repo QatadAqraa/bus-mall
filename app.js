@@ -1,5 +1,7 @@
 'use strict';
 
+//Variables
+
 var arrayOfProducts = [];
 var leftProductImg = document.getElementById('left_product_img');
 var middleProductImg = document.getElementById('middle_product_img');
@@ -14,6 +16,8 @@ var shownImages = [];
 
 console.log(localStorage);
 
+//Constructor function
+
 function Product(name, image) {
     this.name = name;
     this.url = 'images/' + image;
@@ -22,6 +26,8 @@ function Product(name, image) {
 
     arrayOfProducts.push(this);
 }
+
+// Function to clear data from local storage when user want
 
 function clearLocalStorage(){
 
@@ -32,11 +38,15 @@ function clearLocalStorage(){
     renderChart();
 }
 
+// function to store data in local storage
+
 function storeData() {   
 
     localStorage.setItem('Result', JSON.stringify(arrayOfProducts));
 
 }
+
+// Function to check if there is data in local storage and restore this data
 
 function checkAndRestore() {
     
@@ -44,6 +54,8 @@ function checkAndRestore() {
         arrayOfProducts = JSON.parse(localStorage.getItem('Result'));
     }
 }
+
+// Functin to render 3 product image to chose one of this image by user
 
 function renderProduct(leftImage, middleImage, rightImage) {
     leftProductImg.setAttribute('src', arrayOfProducts[leftImage].url);
@@ -57,10 +69,14 @@ function renderProduct(leftImage, middleImage, rightImage) {
 
 }
 
+// Function to count how many times image show
+
 Product.prototype.isShowed = function () {
     return this.Show++;
 
 }
+
+// Function to make result in stastical diagram 
 
 function renderChart() {
 
@@ -194,6 +210,8 @@ function renderChart() {
     });
 }
 
+// Function to check of any of three images show in previos click
+
 function checkAvailability(selectedProductName) {
 
     for (var index = 0; index < shownImages.length; index++) {
@@ -203,6 +221,8 @@ function checkAvailability(selectedProductName) {
     }
     return false;
 }
+
+// function to show three differant images for user to chose one 
 
 function pickAProduct() {
     do {
@@ -249,6 +269,8 @@ function pickAProduct() {
 //     }
 // }
 
+// Function to count how many times image click on and store clicks on local storage
+
 function checkProduct(objectIndicator) {
     for (var index = 0; index < arrayOfProducts.length; index++) {
         if (arrayOfProducts[index].url === objectIndicator) {
@@ -258,6 +280,8 @@ function checkProduct(objectIndicator) {
         }
     }
 }
+
+// event function to stop user clicks after finish trials and after that store image show and clicks
 
 function countProducts(event) {
 
@@ -281,6 +305,8 @@ function countProducts(event) {
     }
 }
 
+//objects
+
 new Product('bag', 'bag.jpg');
 new Product('banana', 'banana.jpg');
 new Product('bathroom', 'bathroom.jpg');
@@ -303,6 +329,8 @@ new Product('water-can', 'water-can.jpg');
 new Product('wine-glass', 'wine-glass.jpg');
 
 console.log(arrayOfProducts);
+
+// Call  Functions
 
 checkAndRestore();
 

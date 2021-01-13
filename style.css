@@ -38,6 +38,12 @@ button {
     margin-top: 40px;
     margin-left: 40px;
 }
+
 ul {
     margin-left: 40px;
+}
+
+#productChart{
+    margin-top: 40px;
+    background-color: white;
 }
